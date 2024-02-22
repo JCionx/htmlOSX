@@ -21,6 +21,7 @@ let last_window = "";
 let app_menu = document.getElementById("app-menu-container");
 let current_z_index = 10;
 let open_apps = [];
+let minimized_apps = [];
 
 function setLastAppOpen(elmnt) {
   last_window = elmnt.id;
@@ -168,6 +169,7 @@ function expandButton(elmnt) {
   let app = elmnt.parentElement.parentElement.parentElement;
   app.style.transition = "250ms";
   app.classList.toggle("expanded");
+  minimized_apps = minimized_apps.filter(e => e !== elmnt.parentElement.parentElement.parentElement.id);
   setTimeout(function() {
     app.style.transition = "0ms";
   }, 250);
@@ -187,6 +189,8 @@ function expandButton(elmnt) {
 function minimizeWindow(elmnt) {
   let app = elmnt.parentElement.parentElement.parentElement;
   app.classList.add("minimize_app_animation");
+  minimized_apps.push(app.id);
+  addDockIndicator(app.id);
   setTimeout(function() {
     app_menu.querySelector("#title").innerHTML = "";
   }, 2)
@@ -199,6 +203,7 @@ function minimizeWindow(elmnt) {
 function closeWindow(elmnt) {
   elmnt.parentElement.parentElement.parentElement.remove();
   open_apps = open_apps.filter(e => e !== elmnt.parentElement.parentElement.parentElement.id);
+  minimized_apps = minimized_apps.filter(e => e !== elmnt.parentElement.parentElement.parentElement.id);
   removeDockIndicator(elmnt.parentElement.parentElement.parentElement.id);
   setTimeout(function() {
     app_menu.querySelector("#title").innerHTML = "";
@@ -242,12 +247,11 @@ function openWindow(id) {
   dragElement(newWindow);
   makeResizableDiv(newWindow);
   open_apps.push(id);
-  addDockIndicator(id);
+  
 }
 
 function launchFromDock(elmnt, id) {
   if (open_apps.includes(id)) {
-    launchIndicator(id);
     return;
   }
   openWindow(id);
@@ -324,7 +328,7 @@ function addDockIndicator(id) {
 
 function removeDockIndicator(id) {
   document.getElementById("dock-indicator-" + id).remove()
-  if (open_apps.length == 0) {
+  if (minimized_apps.length == 0) {
     document.getElementById("dock-separator").style.display = "none";
   }
 }
@@ -334,6 +338,8 @@ function launchIndicator(id) {
   if (app.style.display == "none") {
     app.style.display = "block";
     app.classList.add("bring_app_animation");
+    minimized_apps = minimized_apps.filter(e => e !== id);
+    removeDockIndicator(id);
     setTimeout(function() {
       app.classList.remove("bring_app_animation");
     }, 1000)
