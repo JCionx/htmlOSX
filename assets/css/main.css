@@ -6,6 +6,10 @@ body {
     background-repeat: no-repeat;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     height: 100vh;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 * {
