@@ -11,11 +11,32 @@ let installed_apps = {
   }
 }
 
-for (let id in installed_apps) {
-  if (!id.startsWith("hsys")) {
-    addToLaunchpad(id);
+let dock_apps = {
+  "sys.webbrowser": {
+    "name": "Browser",
+    "url": "apps/browser/index.html",
+    "icon": "apps/browser/icon.svg"
   }
 }
+
+function loadApps(apps_list) {
+  for (let id in apps_list) {
+    if (!id.startsWith("hsys")) {
+      addToLaunchpad(id);
+    }
+  }
+}
+
+function loadDockApps(apps_list) {
+  for (let id in apps_list) {
+    if (!id.startsWith("hsys")) {
+      addToDock(id);
+    }
+  }
+}
+
+loadApps(installed_apps);
+loadDockApps(dock_apps);
 
 let last_window = "";
 let app_menu = document.getElementById("app-menu-container");
