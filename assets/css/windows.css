@@ -147,8 +147,25 @@
     }
 }
 
+@keyframes bring_app {
+    0% {
+        transform: perspective(200px) rotateX(0deg) translateY(20px) scaleX(0.2);
+        top: 100vh;
+    }
+    70% {
+        transform: perspective(200px) rotateX(-10deg) translateY(20px) scaleX(0.7);
+    }
+    100% {
+        transform: none;
+    }
+}
+
 .minimize_app_animation {
     animation: minimize_app 1s forwards;
+}
+
+.bring_app_animation {
+    animation: bring_app 1s forwards;
 }
 
 #default-window {

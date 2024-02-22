@@ -25,12 +25,24 @@
     z-index: 99999999;
 }
 
+#default-dock-app {
+    display: none;
+}
+
 .dock-item {
     height: 100%;
     aspect-ratio: 1;
     margin: 3px;
     transition: 150ms;
     position: relative;
+}
+
+.dock-separator {
+    background-color: rgba(92, 92, 92, 0.822);
+    width: 1px;
+    height: 80%;
+    margin: 2px;
+    display: none;
 }
 
 .dock_item_open_animation {

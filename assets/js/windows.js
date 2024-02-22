@@ -20,6 +20,7 @@ for (let id in installed_apps) {
 let last_window = "";
 let app_menu = document.getElementById("app-menu-container");
 let current_z_index = 10;
+let open_apps = [];
 
 function setLastAppOpen(elmnt) {
   last_window = elmnt.id;
@@ -197,6 +198,8 @@ function minimizeWindow(elmnt) {
 
 function closeWindow(elmnt) {
   elmnt.parentElement.parentElement.parentElement.remove();
+  open_apps = open_apps.filter(e => e !== elmnt.parentElement.parentElement.parentElement.id);
+  removeDockIndicator(elmnt.parentElement.parentElement.parentElement.id);
   setTimeout(function() {
     app_menu.querySelector("#title").innerHTML = "";
   }, 2)
@@ -218,6 +221,10 @@ const myPost = async (postBody) => {
 function openWindow(id) {
   closeLaunchpad();
 
+  if (open_apps.includes(id)) {
+    return;
+  }
+
   title = installed_apps[id].name;
   url = installed_apps[id].url;
   icon = installed_apps[id].icon;
@@ -234,9 +241,15 @@ function openWindow(id) {
   document.getElementById("windows").appendChild(newWindow);
   dragElement(newWindow);
   makeResizableDiv(newWindow);
+  open_apps.push(id);
+  addDockIndicator(id);
 }
 
 function launchFromDock(elmnt, id) {
+  if (open_apps.includes(id)) {
+    launchIndicator(id);
+    return;
+  }
   openWindow(id);
   elmnt.classList.add("dock_item_open_animation");
   setTimeout(function() {
@@ -276,3 +289,55 @@ function addToLaunchpad(id) {
   newEntry.setAttribute("onclick", "openWindow('" + id + "')");
 }
 
+function addToDock(id) {
+  title = installed_apps[id].name;
+  icon = installed_apps[id].icon;
+  url = installed_apps[id].url;
+
+  let newEntry = document.getElementById("default-dock-app").cloneNode(true);
+  newEntry.id = "dock-" + id;
+  newEntry.src = icon;
+  newEntry.setAttribute("onclick", "launchFromDock(this, '" + id + "')");
+
+  let dock = document.getElementById("dock");
+  let dockItems = dock.getElementsByClassName("dock-item");
+  let lastDockItem = dockItems[dockItems.length - 1];
+
+  dock.insertBefore(newEntry, lastDockItem.nextSibling);
+}
+
+function addDockIndicator(id) {
+  let separator = document.getElementById("dock-separator");
+  separator.style.display = "block";
+
+  title = installed_apps[id].name;
+  icon = installed_apps[id].icon;
+  url = installed_apps[id].url;
+
+  let newEntry = document.getElementById("default-dock-app").cloneNode(true);
+  newEntry.id = "dock-indicator-" + id;
+  newEntry.src = icon;
+  newEntry.setAttribute("onclick", "launchIndicator('" + id + "')");
+
+  document.getElementById("dock").appendChild(newEntry);
+}
+
+function removeDockIndicator(id) {
+  document.getElementById("dock-indicator-" + id).remove()
+  if (open_apps.length == 0) {
+    document.getElementById("dock-separator").style.display = "none";
+  }
+}
+
+function launchIndicator(id) {
+  app = document.getElementById(id);
+  if (app.style.display == "none") {
+    app.style.display = "block";
+    app.classList.add("bring_app_animation");
+    setTimeout(function() {
+      app.classList.remove("bring_app_animation");
+    }, 1000)
+  } else {
+    minimizeWindow(app.querySelector(".titlebar-minimize-button"));
+  }
+}
