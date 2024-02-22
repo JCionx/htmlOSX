@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/dock.css">
+    <link rel="stylesheet" href="assets/css/topbar.css">
+    <link rel="stylesheet" href="assets/css/windows.css">
+    <title>htmlOS(X)</title>
+</head>
+<body onclick="bodyClick()">
+    <div id="windows">
+        <div class='app' id="default-window" onclick="setLastAppOpen(this)">
+            <div id="titlebar" class="titlebar">
+                <div class="titlebar-buttons">
+                    <img src="assets/icons/close_btn.svg" class="titlebar-close-button" onclick="closeWindow(this)">
+                    <img src="assets/icons/minimize_button.svg" class="titlebar-minimize-button" onclick="minimizeWindow(this)">
+                    <img src="assets/icons/expand_button.svg" class="titlebar-expand-button" onclick="expandButton(this)">
+                </div>
+                <span id="title">App Title</span>
+                <div></div>
+            </div>
+            <div class='resizers'>
+                <div class='resizer top-left'></div>
+                <div class='resizer top-right'></div>
+                <div class='resizer bottom-left'></div>
+                <div class='resizer bottom-right'></div>
+            </div>
+            <iframe src="" frameborder="0" class="app-iframe"></iframe>
+        </div>
+    </div>
+    <div class="dock-container">
+        <div class="dock">
+            <img src="assets/icons/lauchpad.svg " class="dock-item" onclick="openLaunchpad()">
+            <img src="apps/browser/icon.svg" class="dock-item" onclick="launchFromDock(this, 'sys.webbrowser')">
+        </div>
+    </div>
+    <div class="topbar" id="topbar">
+        <div id="main-menu-container">
+            <img src="assets/icons/logo_small.svg" onclick="openMenu(this)">
+            <div class="menu" id="main-menu"></div>
+        </div>
+        <div id="app-menu-container">
+            <span id="title" onclick="openAppMenu(this)"></span>
+            <div class="menu" id="main-menu"></div>
+        </div>
+    </div>
+    <div class="launchpad" id="launchpad" onclick="closeLaunchpad()">
+        <div class="launchpad-app" id="default-launchpad-app">
+            <img src="" id="launchpad-app-icon">
+            <span id="launchpad-app-title"></span>
+        </div>
+    </div>
+    <script src="assets/js/windows.js"></script>
+    <script src="assets/js/topbar.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

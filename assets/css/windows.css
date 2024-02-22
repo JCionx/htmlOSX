@@ -1,0 +1,202 @@
+.app {
+    background-color: rgba(255, 255, 255, 0.400);
+    backdrop-filter: blur(16px);
+    width: 470px;
+    height: 360px;
+    min-width: 370px;
+    min-height: 260px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 10px;
+}
+
+.app.expanded {
+    width: calc(100vw - 10px);
+    height: calc(100vh - 110px);
+    top: 35px;
+    left: 5px;
+}
+
+.app .resizers{
+    width: 100%;
+    height: 100%;
+}
+
+.app .resizers .resizer{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    z-index: 999;
+}
+
+.app .resizers .resizer.top-left {
+    left: -5px;
+    top: -5px;
+    cursor: nwse-resize;
+}
+.app .resizers .resizer.top-right {
+    right: -5px;
+    top: -5px;
+    cursor: nesw-resize;
+}
+.app .resizers .resizer.bottom-left {
+    left: -5px;
+    bottom: -5px;
+    width: 25px;
+    height: 25px;
+    cursor: nesw-resize;
+}
+.app .resizers .resizer.bottom-right {
+    right: -5px;
+    bottom: -5px;
+    width: 25px;
+    height: 25px;
+    cursor: nwse-resize;
+}
+
+.titlebar {
+    height: 30px;
+    width: 100%;
+    z-index: 10;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titlebar span {
+    color: #4e514a;
+    position: relative;
+    right: 35px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.titlebar-buttons {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}
+
+.titlebar-close-button {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}
+
+.titlebar-close-button:hover {
+    content:url("../icons/close_button_hover.svg");
+}
+
+.titlebar-close-button:active {
+    filter: brightness(0.9);
+}
+
+.titlebar-minimize-button {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}
+
+.titlebar-minimize-button:hover {
+    content:url("../icons/minimize_button_hover.svg");
+}
+
+.titlebar-minimize-button:active {
+    filter: brightness(0.9);
+}
+
+.titlebar-expand-button {
+    width: 13px;
+    height: 13px;
+}
+
+.titlebar-expand-button:hover {
+    content:url("../icons/expand_button_hover.svg");
+}
+
+.titlebar-expand-button:active {
+    filter: brightness(0.9);
+}
+
+.app-iframe {
+    width: 100%;
+    height: calc(100% - 30px);
+    position: relative;
+    bottom: 100%;
+    box-sizing: border-box;
+    border-radius: 0 0 10px 10px;
+}
+
+
+.app.expanded ~ .titlebar {
+    display: none;
+}
+
+@keyframes minimize_app {
+    
+    30% {
+        transform: perspective(200px) rotateX(-10deg) translateY(20px) scaleX(0.7);
+    }
+    100% {
+        transform: perspective(200px) rotateX(0deg) translateY(20px) scaleX(0.2);
+        top: 100vh;
+    }
+}
+
+.minimize_app_animation {
+    animation: minimize_app 1s forwards;
+}
+
+#default-window {
+    display: none;
+}
+
+.launchpad {
+    width: calc(100vw - 80px);
+    height: calc(100vh - 80px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.400);
+    backdrop-filter: blur(16px);
+    position: relative;
+    z-index: 99999999;
+    transition: 300ms;
+    display: none;
+    opacity: 0;
+    padding: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#default-launchpad-app {
+    display: none;
+}
+
+.launchpad::-webkit-scrollbar {
+    display: none;
+}
+
+.launchpad-app {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    margin: 35px 35px 0 35px;
+    text-align: center;
+}
+
+.launchpad-app img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 8px;
+}
+
+.launchpad img:active {
+    filter: contrast(0.9);
+}

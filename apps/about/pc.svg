@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="38" y="76" width="435" height="278" rx="30" fill="#5CACF5" stroke="black" stroke-width="29" stroke-linejoin="round"/>
+<rect x="174" y="399" width="164" height="37" rx="18.5" fill="black"/>
+<rect x="174" y="399" width="164" height="37" rx="18.5" fill="black"/>
+<rect x="204" y="347" width="104" height="63" fill="black"/>
+<rect x="204" y="347" width="104" height="63" fill="black"/>
+<path d="M458.5 173.5C226.5 150.3 123.167 274.5 100.5 339.5H440.5C454.1 339.5 458.167 329.833 458.5 325V173.5Z" fill="#1E5B93" fill-opacity="0.28"/>
+<rect x="186" y="310" width="140" height="25" rx="8" fill="#D9D9D9"/>
+<rect x="188" y="312" width="21" height="21" rx="6" fill="white"/>
+<rect x="211" y="312" width="21" height="21" rx="6" fill="white"/>
+<rect x="234" y="312" width="21" height="21" rx="6" fill="white"/>
+<rect x="280" y="312" width="21" height="21" rx="6" fill="white"/>
+<rect x="303" y="312" width="21" height="21" rx="6" fill="white"/>
+<rect x="257" y="312" width="21" height="21" rx="6" fill="white"/>
+</svg>

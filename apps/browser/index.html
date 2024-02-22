@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser</title>
+</head>
+<body>
+    <div class="row" id="frames">
+        <div class="tab-collumn">
+            <div class="tabs" id="tabs">
+                <div class="tab" id="default-tab" onclick="changeTab(this)">
+                    <span>Default</span>
+                </div>
+                <div class="tab active" id="tab1" onclick="changeTab(this)">
+                    <span>Tab 1</span>
+                </div>
+            </div>
+            <div class="row controls">
+                <img src="plus.svg" onclick="newTab()">
+                <img src="trash.svg" onclick="removeTab()">
+                <img src="home.svg" onclick="goHome()">
+            </div>
+        </div>
+        <iframe src="" frameborder="0" class="current" id="default-frame"></iframe>
+        <iframe src="https://gprivate.com" frameborder="0" class="current" id="frame-tab1"></iframe>
+    </div>
+    <script>
+        let homepage = "https://gprivate.com";
+
+        let tabNumber = 1;
+        let currentTab = "tab1";
+        let amountTabs = 1;
+
+        function changeTab(elmnt) {
+            tab_number = elmnt.id;
+            document.querySelectorAll("iframe").forEach((element) => element.style.display = "none");
+            document.querySelectorAll(".tab").forEach((element) => element.classList.remove("active"));
+            elmnt.classList.add("active");
+            document.getElementById("frame-" + tab_number).style.display = "block";
+            currentTab = tab_number;
+        }
+
+        function newTab() {
+            let newTab = document.getElementById("default-tab").cloneNode(true);
+            tabNumber++;
+            newTab.id = "tab" + tabNumber;
+            newTab.innerHTML = "Tab " + tabNumber;
+            
+            let newFrame = document.getElementById("default-frame").cloneNode(true);
+            newFrame.id = "frame-tab" + tabNumber;
+            newFrame.src = homepage;
+
+            document.getElementById("tabs").appendChild(newTab);
+            document.getElementById("frames").appendChild(newFrame);
+            changeTab(newTab);
+
+            amountTabs++;
+        }
+
+        function goHome() {
+            document.getElementById("frame-" + currentTab).src = homepage;
+        }
+
+        function removeTab() {
+            if (amountTabs > 1) {
+                document.getElementById(currentTab).remove()
+                document.getElementById("frame-" + currentTab).remove()
+                changeTab(document.querySelectorAll(".tab")[1]);
+                amountTabs--;
+            }
+        }
+
+    </script>
+</body>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .tab-collumn {
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #default-tab, #default-frame {
+        display: none;
+    }
+
+    .tabs {
+        height: 100%;
+        overflow: auto;
+    }
+
+    iframe {
+        width: 100%;
+        height: calc(100vh - 8px);
+        margin: 0 8px 8px 8px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .current {
+        display: block;
+    }
+
+    .tab {
+        height: 30px;
+        border-radius: 5px;
+        margin: 0 0 0 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        cursor: default;
+    }
+    
+    .active {
+        background-color: rgba(255, 255, 255, 0.404);
+    }
+
+    .controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 8px;
+        width: 200px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .controls img {
+        width: 30px;
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 570px) {
+        .tab-collumn {
+            display: none;
+        }
+    }
+
+
+</style>
+</html>

@@ -1,0 +1,58 @@
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: rgba(156, 156, 156, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.151);
+    backdrop-filter: blur(16px);
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 3px;
+}
+
+.topbar img {
+    width: 25px;
+    height: 25px;
+}
+
+.menu {
+    display: none;
+    flex-direction: column;
+    border  : 1px solid rgba(0, 0, 0, 0.151);
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(82, 80, 80, 0.514);
+    backdrop-filter: blur(16px);
+    position: absolute;
+    top: 35px;
+    z-index: 99999999999999;
+}
+
+.menu button {
+    text-align: start;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+}
+
+.menu button:hover {
+    background-color: #186DFE;
+    border-radius: 4px;
+}
+
+#main-menu-container {
+    display: flex;
+}
+
+#app-menu-container #title {
+    font-weight: bold;
+    color: white;
+    margin-left: 10px;
+    font-size: 14px;
+}
