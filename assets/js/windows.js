@@ -13,6 +13,11 @@ let installed_apps = {
     "name": "API Lab",
     "url": "apps/apilab/index.html",
     "icon": "apps/apilab/icon.svg"
+  },
+  "sys.timequick": {
+    "name": "TimeQuick",
+    "url": "apps/timequick/index.html",
+    "icon": "apps/timequick/icon.svg"
   }
 }
 
@@ -21,6 +26,11 @@ let dock_apps = {
     "name": "Browser",
     "url": "apps/browser/index.html",
     "icon": "apps/browser/icon.svg"
+  },
+  "sys.timequick": {
+    "name": "TimeQuick",
+    "url": "apps/timequick/index.html",
+    "icon": "apps/timequick/icon.svg"
   }
 }
 
