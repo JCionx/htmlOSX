@@ -103,6 +103,14 @@ body {
     border-radius: 10px;
     opacity: 0;
     transition: 300ms;
+    background-image: url("../icons/notification_x.svg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.notification .close-button img {
+    width: 10px;
 }
 
 .notification .close-button:active {
