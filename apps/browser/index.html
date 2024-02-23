@@ -81,6 +81,7 @@
         }
 
         function urlInput() {
+            window.parent.postMessage("hello", "*");
             document.getElementById("url-prompt").style.display = "flex";
         }
 

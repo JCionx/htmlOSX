@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Lab</title>
+</head>
+<body>
+    <h2>Notification API<h1>
+    <div class="code">
+        <img src="copy.svg" class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('span').innerHTML)">
+<span>parent.postMessage({
+    "action": "sendNotification",
+    "appId": "sys.apilab",
+    "content": "This is a notification!",
+    "time": 3000
+}, "*");</span>
+    </div>
+    <button onclick='parent.postMessage({"action": "sendNotification","appId": "sys.apilab","content": "This is a notification!","time": 3000}, "*")'>Try</button>
+</body>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    button {
+        margin: 3px;
+        background: rgb(7,95,200);
+        background: linear-gradient(180deg, rgba(7,95,200,1) 0%, rgba(25,115,227,1) 100%);
+        color: white;
+        border: none;
+        padding: 4px 18px;
+        border-radius: 5px;
+    }
+
+    button:active {
+        filter: brightness(0.9);
+    }
+    .code {
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.404);
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: normal;
+        font-family: 'Courier New', Courier, monospace;
+        word-wrap: break-word;
+        white-space: -moz-pre-wrap;
+        white-space: pre-wrap;
+        padding: 10px;
+    }
+
+    .copy-btn {
+        background-color: rgba(255, 255, 255, 0.404);
+        padding: 5px;
+        border-radius: 5px;
+        width: 20px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+</style>
+</html>

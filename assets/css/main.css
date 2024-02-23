@@ -39,3 +39,92 @@ body {
     bottom: 0px;
     font-size: 1.2rem;
 }
+
+.notification {
+    background-color: rgba(156, 156, 156, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 15px;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    height: auto;
+    width: 300px;
+    padding: 15px;
+    color: white;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.notification-show-animation {
+    animation: showNotification 250ms ease-in-out forwards;
+}
+
+.notification-hide-animation {
+    animation: hideNotification 250ms ease-in-out forwards;
+}
+
+.notification-contents {
+    margin-left: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.notification strong {
+    font-size: 20px;
+}
+
+.notification span {
+    margin-top: 5px;
+}
+
+.notification:hover .close-button {
+    opacity: 1;
+}
+
+.notification img {
+    width: 50px;
+    height: 50px;
+}
+
+.notification .close-button {
+    background-color: rgba(156, 156, 156, 0.747);
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: 300ms;
+}
+
+.notification .close-button:active {
+    filter: brightness(0.9);
+}
+
+@keyframes showNotification {
+    0% {
+        right: -300px;
+    }
+
+    100% {
+        right: 10px;
+    }
+}
+
+@keyframes hideNotification {
+    0% {
+        right: 10px;
+    }
+
+    100% {
+        right: -300px;
+    }
+}

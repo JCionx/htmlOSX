@@ -2,12 +2,17 @@ let installed_apps = {
   "hsys.systeminfo": {
     "name": "About this computer",
     "url": "apps/about/index.html",
-    "icon": "apps/about/pc.svg"
+    "icon": "apps/about/icon.svg"
   },
   "sys.webbrowser": {
     "name": "Browser",
     "url": "apps/browser/index.html",
     "icon": "apps/browser/icon.svg"
+  },
+  "sys.apilab": {
+    "name": "API Lab",
+    "url": "apps/apilab/index.html",
+    "icon": "apps/apilab/icon.svg"
   }
 }
 
@@ -225,7 +230,12 @@ function closeWindow(elmnt) {
   elmnt.parentElement.parentElement.parentElement.remove();
   open_apps = open_apps.filter(e => e !== elmnt.parentElement.parentElement.parentElement.id);
   minimized_apps = minimized_apps.filter(e => e !== elmnt.parentElement.parentElement.parentElement.id);
-  removeDockIndicator(elmnt.parentElement.parentElement.parentElement.id);
+  try {
+    removeDockIndicator(elmnt.parentElement.parentElement.parentElement.id);
+  } catch (e) {
+    console.log(e);
+  }
+  
   setTimeout(function() {
     app_menu.querySelector("#title").innerHTML = "";
   }, 2)
@@ -368,3 +378,30 @@ function launchIndicator(id) {
     minimizeWindow(app.querySelector(".titlebar-minimize-button"));
   }
 }
+
+function hideNotification() {
+  notification.classList.add("notification-hide-animation");
+  setTimeout(function() {
+    notification.style.display = "none";
+    notification.classList.remove("notification-hide-animation");
+  }, 250)
+}
+
+function showNotification(id, content = "Sent a notification", time = 3000) {
+  let notification = document.getElementById("notification");
+  notification.querySelector("strong").innerHTML = installed_apps[id].name;
+  notification.querySelector("span").innerHTML = content;
+  notification.querySelector("img").src = installed_apps[id].icon;
+  notification.style.display = "flex";
+  notification.classList.add("notification-show-animation");
+  setTimeout(function() {
+    notification.classList.remove("notification-show-animation");
+    setTimeout(function() {
+      hideNotification();
+    }, time)
+  }, 250) 
+}
+
+window.addEventListener('message', (event) => {
+  alert('Received message from iframe:', event.data);
+});
