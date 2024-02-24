@@ -11,10 +11,10 @@
 }
 
 .dock {
-    background-color: rgba(156, 156, 156, 0.4);
+    background-color: rgba(120, 120, 120, 0.358);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(0, 0, 0, 0.151);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     border-radius: 15px;
     height: 60px;
     display: flex;
@@ -22,7 +22,8 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 8px 5px;
+    padding-bottom: 12px;
     z-index: 99999999;
 }
 
@@ -47,7 +48,7 @@
 }
 
 .dock_item_open_animation {
-    animation: dock_app_open 2s ease-in-out forwards;
+    animation: dock_app_open 0.85s ease-in-out forwards;
 }
 
 .dock-item:hover {
@@ -61,22 +62,13 @@
 }
 
 @keyframes dock_app_open {
-    10% {
-        transform: translateY(-50px);
-    }
-    20% {
+    0% {
         transform: translateY(0px);
     }
-    30% {
+    50% {
         transform: translateY(-30px);
     }
-    40% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-    60% {
+    100% {
         transform: translateY(0px);
     }
 }

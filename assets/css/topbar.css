@@ -3,11 +3,10 @@
     top: 0;
     left: 0;
     width: 100vw;
-    background-color: rgba(156, 156, 156, 0.4);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.151);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    height: 32px;
+    background-color: rgba(120, 120, 120, 0.358);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    height: 28px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -24,28 +23,37 @@
 .menu {
     display: none;
     flex-direction: column;
-    border  : 1px solid rgba(0, 0, 0, 0.151);
+    border: 1px solid rgba(0, 0, 0, 0.322);
     padding: 5px;
     border-radius: 5px;
-    background-color: rgba(82, 80, 80, 0.514);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+
+    background-color: rgba(255, 255, 255, 0.786);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+
     position: absolute;
-    top: 35px;
-    z-index: 9999999999999999999999;
+    top: 32px;
+    z-index: 999999999999999;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 10px;
 }
 
 .menu button {
     text-align: start;
     background-color: transparent;
     border: none;
-    color: white;
+    color: black;
     padding: 5px;
 }
 
 .menu button:hover {
-    background-color: #186DFE;
+    background: rgb(100, 157, 247);
+    background: linear-gradient(
+        90deg,
+        rgba(100, 157, 247, 0.9300699300699301) 0%,
+        rgba(55, 138, 244, 1) 100%
+    );
     border-radius: 4px;
+    color: white;
 }
 
 #main-menu-container {
