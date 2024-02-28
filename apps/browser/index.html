@@ -90,6 +90,14 @@
             document.getElementById("frame-" + currentTab).src = url;
             document.getElementById("url-prompt").style.display = "none";
         }
+
+        window.addEventListener('message', (event) => {
+            console.log(event.data);
+            let content = event.data;
+            if (content.action == "htmlosx.installApp") {
+                parent.postMessage({"action": "installApp", "appId": content.id, "name": content.name, "icon": content.icon, "url": content.url}, "*");
+            }
+        })
     </script>
 </body>
 <style>

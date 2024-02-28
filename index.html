@@ -48,10 +48,11 @@
         </div>
     </div>
     <div class="launchpad" id="launchpad" onclick="closeLaunchpad()">
-        <div class="launchpad-app" id="default-launchpad-app">
+        <div class="launchpad-app" draggable="true" id="default-launchpad-app" ondragend="trashLaunchpadApp(this)">
             <img src="" id="launchpad-app-icon">
             <span id="launchpad-app-title"></span>
         </div>
+        <img src="assets/icons/trash.svg" id="launchpad-trash" ondragenter="dragEnterLaunchpadApp()" ondragleave="dragLeaveLaunchpadApp()">
     </div>
     <div class="notification" id="notification">
         <img src="">
@@ -61,13 +62,17 @@
             <span></span>
         </div>
     </div>
-    <div class="alert">
-        <img src="assets/icons/lauchpad.svg">
-        <strong>Do you want to install this app?</strong>
-        <span>This app was downloaded from the internet and may contain malware.</span>
-        <div class="alert-actions">
-            <button>Open</button>
-            <button>Cancel</button>
+    <div class="alert-container" id="alert">
+        <div class="alert">
+            <img src="assets/icons/lauchpad.svg">
+            <div class="alert-text">
+                <strong>Do you want to install the app ""?</strong>
+                <span>This app was downloaded from the internet and may contain malware.</span>
+            </div>
+            <div class="alert-actions">
+                <button id="install-btn">Install</button>
+                <button onclick="this.parentElement.parentElement.parentElement.style.display = 'none'">Cancel</button>
+            </div>
         </div>
     </div>
     <script src="assets/js/windows.js"></script>

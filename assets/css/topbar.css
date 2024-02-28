@@ -13,6 +13,7 @@
     align-items: center;
     box-sizing: border-box;
     padding-left: 3px;
+    z-index: 99999;
 }
 
 .topbar img {

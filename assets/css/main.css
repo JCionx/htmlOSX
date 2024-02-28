@@ -56,6 +56,7 @@ body {
     display: none;
     flex-direction: row;
     align-items: flex-start;
+    z-index: 99999999999;
 }
 
 .notification-show-animation {
@@ -137,9 +138,84 @@ body {
     }
 }
 
-.alert {
+.alert-container {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background-color: ;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 99999999999;
+}
+
+.alert {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.322);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    pointer-events: all;
+}
+
+.alert-actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.alert-text {
+    width: 85%;
+}
+
+.alert-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-text span {
+    margin: 12px;
+}
+
+.alert-actions button {
+    width: 50%;
+    margin: 13px;
+    height: 35px;
+    border-radius: 7px;
+    border: none;
+    background-color: #116cd5;
+}
+
+.alert-actions > button:first-child {
+    margin: 13px 0 13px 13px;
+    background-color: #969a9c96;
+}
+
+.alert-actions button:active {
+    filter: brightness(0.9);
+}
+
+.alert-actions > button:last-child {
+    margin: 13px 13px 0 13px;
+}
+
+.alert img {
+    width: 80px;
+    margin: 40px;
+}
+
+#launchpad-trash {
+    width: 60px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
