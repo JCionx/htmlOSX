@@ -1,7 +1,7 @@
 .app {
-    background-color: rgba(255, 255, 255, 0.400);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
     width: 470px;
     height: 360px;
     min-width: 370px;
@@ -20,12 +20,12 @@
     left: 5px;
 }
 
-.app .resizers{
+.app .resizers {
     width: 100%;
     height: 100%;
 }
 
-.app .resizers .resizer{
+.app .resizers .resizer {
     width: 15px;
     height: 15px;
     position: absolute;
@@ -89,7 +89,7 @@
 }
 
 .titlebar-close-button:hover {
-    content:url("../icons/close_button_hover.svg");
+    content: url("../icons/close_button_hover.svg");
 }
 
 .titlebar-close-button:active {
@@ -103,7 +103,7 @@
 }
 
 .titlebar-minimize-button:hover {
-    content:url("../icons/minimize_button_hover.svg");
+    content: url("../icons/minimize_button_hover.svg");
 }
 
 .titlebar-minimize-button:active {
@@ -116,7 +116,7 @@
 }
 
 .titlebar-expand-button:hover {
-    content:url("../icons/expand_button_hover.svg");
+    content: url("../icons/expand_button_hover.svg");
 }
 
 .titlebar-expand-button:active {
@@ -132,15 +132,14 @@
     border-radius: 0 0 10px 10px;
 }
 
-
 .app.expanded ~ .titlebar {
     display: none;
 }
 
 @keyframes minimize_app {
-    
     30% {
-        transform: perspective(200px) rotateX(-10deg) translateY(20px) scaleX(0.7);
+        transform: perspective(200px) rotateX(-10deg) translateY(20px)
+            scaleX(0.7);
     }
     100% {
         transform: perspective(200px) rotateX(0deg) translateY(20px) scaleX(0.2);
@@ -154,7 +153,8 @@
         top: 100vh;
     }
     70% {
-        transform: perspective(200px) rotateX(-10deg) translateY(20px) scaleX(0.7);
+        transform: perspective(200px) rotateX(-10deg) translateY(20px)
+            scaleX(0.7);
     }
     100% {
         transform: none;
@@ -179,7 +179,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.400);
+    background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     position: relative;
@@ -191,8 +191,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     overflow: auto;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 #default-launchpad-app {
     display: none;
@@ -208,6 +208,7 @@
     flex-direction: column;
     margin: 35px 35px 0 35px;
     text-align: center;
+    height: fit-content;
 }
 
 .launchpad-app img {
