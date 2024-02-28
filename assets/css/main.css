@@ -193,11 +193,13 @@ body {
     border-radius: 7px;
     border: none;
     background-color: #116cd5;
+    color: white;
 }
 
 .alert-actions > button:first-child {
     margin: 13px 0 13px 13px;
     background-color: #969a9c96;
+    color: black;
 }
 
 .alert-actions button:active {
