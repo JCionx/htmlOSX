@@ -17,6 +17,18 @@
 }, "*");</span>
     </div>
     <button onclick='parent.postMessage({"action": "sendNotification","appId": "sys.apilab","content": "This is a notification!","time": 3000}, "*")'>Try</button>
+    <h2>Request install API<h1></h1>
+    <div class="code">
+        <img src="copy.svg" class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('span').innerHTML)">
+<span>parent.postMessage({
+    "action": "htmlosx.installApp",
+    "id": "com.jcionx.outertune",
+    "name": "OuterTune",
+    "icon": "https://jcionx.github.io/OuterTune/icon-192.png",
+    "url": "https://jcionx.github.io/OuterTune/"
+}, "*");</span>
+    </div>
+    <button onclick='parent.postMessage({"action": "installApp", "appId": "com.jcionx.outertune", "name": "OuterTune", "icon": "https://jcionx.github.io/OuterTune/icon-192.png", "url": "https://jcionx.github.io/OuterTune/"}, "*")'>Try</button>
 </body>
 <style>
     body {

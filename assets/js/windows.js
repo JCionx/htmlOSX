@@ -463,6 +463,10 @@ function saveApps() {
 }
 
 function installUserApp(id, name, icon, url) {
+  if (user_apps[id] != undefined) {
+    showNotification('hsys.daemon', name + " is already installed", 3000)
+    return;
+  }
   user_apps[id] = {
     "name": name,
     "url": url,
