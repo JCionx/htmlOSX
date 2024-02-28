@@ -1,4 +1,10 @@
-let installed_apps = {
+let user_apps = JSON.parse(localStorage.getItem("installed_apps"));
+
+if (user_apps == null) {
+  user_apps = {};
+}
+
+let system_apps = {
   "hsys.systeminfo": {
     "name": "About this computer",
     "url": "apps/about/index.html",
@@ -21,16 +27,26 @@ let installed_apps = {
   }
 }
 
-let dock_apps = {
-  "sys.webbrowser": {
-    "name": "Browser",
-    "url": "apps/browser/index.html",
-    "icon": "apps/browser/icon.svg"
-  },
-  "sys.timequick": {
-    "name": "TimeQuick",
-    "url": "apps/timequick/index.html",
-    "icon": "apps/timequick/icon.svg"
+function updateAppsList() {
+  installed_apps = Object.assign({}, user_apps, system_apps);
+}
+
+updateAppsList();
+
+let dock_apps = JSON.parse(localStorage.getItem("dock_apps"));
+
+if (dock_apps == null) {
+  dock_apps = {
+    "sys.webbrowser": {
+      "name": "Browser",
+      "url": "apps/browser/index.html",
+      "icon": "apps/browser/icon.svg"
+    },
+    "sys.timequick": {
+      "name": "TimeQuick",
+      "url": "apps/timequick/index.html",
+      "icon": "apps/timequick/icon.svg"
+    }
   }
 }
 
@@ -412,6 +428,18 @@ function showNotification(id, content = "Sent a notification", time = 3000) {
   }, 250) 
 }
 
-window.addEventListener('message', (event) => {
-  alert('Received message from iframe:', event.data);
-});
+function saveApps() {
+  localStorage.setItem("installed_apps", JSON.stringify(user_apps));
+  //localStorage.setItem("dock_apps", JSON.stringify(dock_apps));
+}
+
+function installUserApp(id, name, icon, url) {
+  user_apps[id] = {
+    "name": name,
+    "url": url,
+    "icon": icon
+  }
+  updateAppsList()
+  addToLaunchpad(id);
+  saveApps();
+}

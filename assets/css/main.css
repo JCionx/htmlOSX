@@ -136,3 +136,10 @@ body {
         right: -300px;
     }
 }
+
+.alert {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-color: ;
+}
