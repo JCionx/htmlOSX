@@ -1,0 +1,13 @@
+body {
+    overflow: hidden;
+}
+
+.content {
+    border-radius: 7px;
+    height: 20rem;
+}
+
+.content.terminal {
+    --background: #292929;
+    --color: #d0d0d0;
+}

@@ -2,39 +2,44 @@ let user_apps = JSON.parse(localStorage.getItem("installed_apps"));
 let launchpad_trash_hovered = false;
 
 if (user_apps == null) {
-  user_apps = {};
+    user_apps = {};
 }
 
 let system_apps = {
-  "hsys.systeminfo": {
-    "name": "About this computer",
-    "url": "apps/about/index.html",
-    "icon": "apps/about/icon.svg"
-  },
-  "hsys.daemon": {
-    "name": "System Daemon",
-    "url": "#",
-    "icon": "assets/icons/daemon.svg"
-  },
-  "sys.webbrowser": {
-    "name": "Browser",
-    "url": "apps/browser/index.html",
-    "icon": "apps/browser/icon.svg"
-  },
-  "sys.apilab": {
-    "name": "API Lab",
-    "url": "apps/apilab/index.html",
-    "icon": "apps/apilab/icon.svg"
-  },
-  "sys.timequick": {
-    "name": "TimeQuick",
-    "url": "apps/timequick/index.html",
-    "icon": "apps/timequick/icon.svg"
-  }
-}
+    "hsys.systeminfo": {
+        name: "About this computer",
+        url: "apps/about/index.html",
+        icon: "apps/about/icon.svg",
+    },
+    "hsys.daemon": {
+        name: "System Daemon",
+        url: "#",
+        icon: "assets/icons/daemon.svg",
+    },
+    "sys.webbrowser": {
+        name: "Browser",
+        url: "apps/browser/index.html",
+        icon: "apps/browser/icon.svg",
+    },
+    "sys.apilab": {
+        name: "API Lab",
+        url: "apps/apilab/index.html",
+        icon: "apps/apilab/icon.svg",
+    },
+    "sys.timequick": {
+        name: "TimeQuick",
+        url: "apps/timequick/index.html",
+        icon: "apps/timequick/icon.svg",
+    },
+    "sys.terminal": {
+        name: "Terminal",
+        url: "apps/terminal/index.html",
+        icon: "apps/terminal/icon.png",
+    },
+};
 
 function updateAppsList() {
-  installed_apps = Object.assign({}, user_apps, system_apps);
+    installed_apps = Object.assign({}, user_apps, system_apps);
 }
 
 updateAppsList();
@@ -42,18 +47,18 @@ updateAppsList();
 let dock_apps = JSON.parse(localStorage.getItem("dock_apps"));
 
 if (dock_apps == null) {
-  dock_apps = {
-    "sys.webbrowser": {
-      "name": "Browser",
-      "url": "apps/browser/index.html",
-      "icon": "apps/browser/icon.svg"
-    },
-    "sys.timequick": {
-      "name": "TimeQuick",
-      "url": "apps/timequick/index.html",
-      "icon": "apps/timequick/icon.svg"
-    }
-  }
+    dock_apps = {
+        "sys.webbrowser": {
+            name: "Browser",
+            url: "apps/browser/index.html",
+            icon: "apps/browser/icon.svg",
+        },
+        "sys.timequick": {
+            name: "TimeQuick",
+            url: "apps/timequick/index.html",
+            icon: "apps/timequick/icon.svg",
+        },
+    };
 }
 
 function loadApps(apps_list) {
@@ -365,7 +370,12 @@ function addToLaunchpad(id) {
 
     document.getElementById("launchpad").appendChild(newEntry);
     newEntry.setAttribute("onclick", "openWindow('" + id + "')");
-    newEntry.setAttribute("oncontextmenu", "addToDock('" + id + "');saveApps();showNotification('hsys.daemon', 'Added to dock', 3000)");
+    newEntry.setAttribute(
+        "oncontextmenu",
+        "addToDock('" +
+            id +
+            "');saveApps();showNotification('hsys.daemon', 'Added to dock', 3000)"
+    );
 }
 
 function addToDock(id) {
@@ -377,7 +387,10 @@ function addToDock(id) {
     newEntry.id = "dock-" + id;
     newEntry.src = icon;
     newEntry.setAttribute("onclick", "launchFromDock(this, '" + id + "')");
-    newEntry.setAttribute("oncontextmenu", "this.remove();saveApps();showNotification('hsys.daemon', 'Removed from dock', 3000)")
+    newEntry.setAttribute(
+        "oncontextmenu",
+        "this.remove();saveApps();showNotification('hsys.daemon', 'Removed from dock', 3000)"
+    );
     let dock = document.getElementById("dock");
     let dockItems = dock.getElementsByClassName("dock-item");
     let lastDockItem = dockItems[dockItems.length - 1];
@@ -447,77 +460,102 @@ function showNotification(id, content = "Sent a notification", time = 3000) {
 }
 
 function saveApps() {
-  localStorage.setItem("installed_apps", JSON.stringify(user_apps));
-  dock_apps = {};
-  document.querySelectorAll(".dock-item").forEach(element => {
-    if (element.id.startsWith("dock-indicator-")) {
-        return
-    }
-    if (element.id == "default-dock-app") {
-        return
-    }
-    console.log(installed_apps[element.id.split("dock-")[1]])
-    dock_apps[element.id.split("dock-")[1]] = installed_apps[element.id.split("dock-")[1]]
-  })
-  localStorage.setItem("dock_apps", JSON.stringify(dock_apps));
+    localStorage.setItem("installed_apps", JSON.stringify(user_apps));
+    dock_apps = {};
+    document.querySelectorAll(".dock-item").forEach((element) => {
+        if (element.id.startsWith("dock-indicator-")) {
+            return;
+        }
+        if (element.id == "default-dock-app") {
+            return;
+        }
+        console.log(installed_apps[element.id.split("dock-")[1]]);
+        dock_apps[element.id.split("dock-")[1]] =
+            installed_apps[element.id.split("dock-")[1]];
+    });
+    localStorage.setItem("dock_apps", JSON.stringify(dock_apps));
 }
 
 function installUserApp(id, name, icon, url) {
-  if (user_apps[id] != undefined) {
-    showNotification('hsys.daemon', name + " is already installed", 3000)
-    return;
-  }
-  user_apps[id] = {
-    "name": name,
-    "url": url,
-    "icon": icon
-  }
-  updateAppsList()
-  addToLaunchpad(id);
-  showNotification('hsys.daemon', name + " installed successfully", 3000)
-  saveApps();
+    if (user_apps[id] != undefined) {
+        showNotification("hsys.daemon", name + " is already installed", 3000);
+        return;
+    }
+    user_apps[id] = {
+        name: name,
+        url: url,
+        icon: icon,
+    };
+    updateAppsList();
+    addToLaunchpad(id);
+    showNotification("hsys.daemon", name + " installed successfully", 3000);
+    saveApps();
 }
 
 function requestInstallApp(id, name, icon, url) {
-  if (id.startsWith("hsys") || id.startsWith("sys")) {
-    showNotification("hsys.daemon", "You can't install system apps from untrusted sources", 5000);
-    return;
-  }
-  let app_alert = document.getElementById("alert");
-  app_alert.style.display = "flex";
-  app_alert.querySelector("strong").innerHTML = "Do you want to install the app “" + name + "”?";
-  app_alert.querySelector("img").src = icon;
-  app_alert.querySelector("#install-btn").setAttribute("onclick", "installUserApp('" + id + "', '" + name + "', '" + icon + "', '" + url + "');this.parentElement.parentElement.parentElement.style.display = 'none'");
+    if (id.startsWith("hsys") || id.startsWith("sys")) {
+        showNotification(
+            "hsys.daemon",
+            "You can't install system apps from untrusted sources",
+            5000
+        );
+        return;
+    }
+    let app_alert = document.getElementById("alert");
+    app_alert.style.display = "flex";
+    app_alert.querySelector("strong").innerHTML =
+        "Do you want to install the app “" + name + "”?";
+    app_alert.querySelector("img").src = icon;
+    app_alert
+        .querySelector("#install-btn")
+        .setAttribute(
+            "onclick",
+            "installUserApp('" +
+                id +
+                "', '" +
+                name +
+                "', '" +
+                icon +
+                "', '" +
+                url +
+                "');this.parentElement.parentElement.parentElement.style.display = 'none'"
+        );
 }
 
 function uninstallUserApp(id) {
-  if (id.startsWith("hsys") || id.startsWith("sys")) {
-    showNotification("hsys.daemon", "You can't uninstall system apps", 3000);
-    return;
-  }
-  delete user_apps[id];
-  updateAppsList()
-  closeWindow(document.getElementById(id).querySelector(".titlebar-close-button"));
-  document.getElementById(id).remove()
-  try {
-    document.getElementById("dock-" + id).remove();
-  } catch (e) {
-    console.log(e);
-  }
-  saveApps();
+    if (id.startsWith("hsys") || id.startsWith("sys")) {
+        showNotification(
+            "hsys.daemon",
+            "You can't uninstall system apps",
+            3000
+        );
+        return;
+    }
+    delete user_apps[id];
+    updateAppsList();
+    closeWindow(
+        document.getElementById(id).querySelector(".titlebar-close-button")
+    );
+    document.getElementById(id).remove();
+    try {
+        document.getElementById("dock-" + id).remove();
+    } catch (e) {
+        console.log(e);
+    }
+    saveApps();
 }
 
 function dragEnterLaunchpadApp() {
-  launchpad_trash_hovered = true;
+    launchpad_trash_hovered = true;
 }
 function dragLeaveLaunchpadApp() {
-  setTimeout(function() {
-    launchpad_trash_hovered = false;
-  }, 100);
+    setTimeout(function () {
+        launchpad_trash_hovered = false;
+    }, 100);
 }
 function trashLaunchpadApp(elmnt) {
-  if (launchpad_trash_hovered) {
-    console.log(elmnt.id);
-    uninstallUserApp(elmnt.id);
-  }
+    if (launchpad_trash_hovered) {
+        console.log(elmnt.id);
+        uninstallUserApp(elmnt.id);
+    }
 }
